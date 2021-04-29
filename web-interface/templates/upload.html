@@ -1,0 +1,28 @@
+<!doctype html>
+    <head>
+        <title>Upload Images</title>
+        <script src="/static/dropzone.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/static/style.css">
+        <link rel="stylesheet" type="text/css" href="/static/basic.min.css">
+    </head>
+    <body>
+        <h1>Upload Images</h1>
+        <form id="imageselector" class="image-dropzone">
+        </form>
+        <script>
+            var myDropzone = new Dropzone("#imageselector", {
+                url: "/upload_image",
+                paramName: "image"
+            });
+
+            myDropzone.on("sending", function(file, xhr, data) {
+                // if file is actually a folder
+                console.log(data);
+                console.log(file);
+                if(file.fullPath){
+                    data.append("fullPath", file.fullPath);
+                }
+            });
+        </script>
+    </body>
+</html>
